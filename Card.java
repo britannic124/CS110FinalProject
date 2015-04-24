@@ -6,16 +6,16 @@
 public class Card {
 
    // Define class constants
-   public static int ACE = 14,
-                     KING = 13,
-                     QUEEN = 12,
-                     JACK = 11,
+   public static int ACE = 1,
+                     JACK = 10,
+                     KING = 12,
+                     QUEEN = 13,
                      SPADES = 0,
                      HEARTS = 1,
                      DIAMONDS = 2,
                      CLUBS = 3,
-                     MIN_RANK = 2,
-                     MAX_RANK = 14,
+                     MIN_RANK = ACE,
+                     MAX_RANK = KING,
                      NUM_SUITS = 4,
                      /** The default rank. */
                      DEF_RANK = ACE,

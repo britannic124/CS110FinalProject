@@ -34,9 +34,9 @@ public class Deck
    public void freshDeck()
    {
       deck = new Card[CARDS_IN_DECK];
-      for (int r = Card.ACE; r<=Card.KING;r++)
+      for (int r = Card.MIN_RANK; r<=Card.MAX_RANK;r++)
       {
-         for (int s=Card.SPADES;s<=Card.CLUBS;s++)
+         for (int s=0;s<=Card.NUM_SUITS;s++)
          {
             deck[ct]=new Card(r,s);
             ct = ct + 1;
@@ -85,21 +85,6 @@ public class Deck
    public boolean isEmpty()
    {
       return (cardsRemaining() == 0);
-   }
-
-   public static void main(String [] args) 
-   {
-      Deck deck = new Deck();
-      deck.shuffle();
-      int i = 0;
-      while (!(deck.isEmpty()))
-         System.out.println(i++ + " : " + deck.dealCard().toString());
-      deck.freshDeck();
-      System.out.println("************");
-      i = 0;
-      while (!(deck.isEmpty()))
-         System.out.println(i++ + " : " + deck.dealCard().toString());
-
    }
 }
 
