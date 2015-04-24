@@ -6,7 +6,8 @@
  */
 
 import java.util.Random;
-public class Deck {
+public class Deck 
+{
    /** 
    *  Number of cards in standard deck {@value #CARDS_IN_DECK}
    **/
