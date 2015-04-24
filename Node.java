@@ -25,6 +25,7 @@ public class Node {
     item = newItem;
     next = nextNode;
   } 
+  
   /** set data field (item) of Node
       @param newItem, to set item field to
   */
