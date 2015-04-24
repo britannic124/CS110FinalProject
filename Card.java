@@ -30,6 +30,7 @@ public class Card {
    /** Creates a default card—an ace of spades. */
    public Card() {
       rank = DEF_RANK;
+      
       suit = DEF_SUIT;
    }
    
