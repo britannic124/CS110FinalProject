@@ -35,6 +35,16 @@ public class Card {
    }
    
    /**
+      Creates a copy of another card.
+      @param orig The card to be copied.
+   */
+   public Card(Card orig) {
+      
+      rank = orig.getRank();
+      suit = orig.getSuit();
+   }
+   
+   /**
       Creates a card with the rank and suit given.
       @param rank The card’s rank as an interger.
                   (If an invalid value is given,
@@ -153,6 +163,29 @@ public class Card {
    */
    public String getNameShort() {
       return getRankShort() + getSuitShort();
+   }
+   
+   /**
+      Compares the ranks of two cards.
+      @param other The card to compare to.
+      @return If the rank is higher than
+      the other card’s: 1; if it is equal
+      to other card’s: 0; if it is lower
+      than other card’s: -1.
+   */
+   public int compareRank(Card other) {
+      
+      int rank2 = other.getRank();
+      
+      if (rank > rank2) {
+         return 1;
+      }
+      else if (rank == rank2) {
+         return 0;
+      }
+      else {
+         return -1;
+      }
    }
    
    /**
