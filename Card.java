@@ -1,44 +1,47 @@
 /**
-   Represents a standard French playing card (aces high).
+   Represents a standard French playing card.
    @author J.P. O’Malley
 */
+
+
+// Import classes.
+import java.util.Random;
 
 public class Card {
 
    // Define class constants
    public static int ACE = 1,
-                     JACK = 10,
-                     KING = 12,
-                     QUEEN = 13,
+                     JACK = 11,
+                     QUEEN = 12,
+                     KING = 13,
                      SPADES = 0,
                      HEARTS = 1,
                      DIAMONDS = 2,
                      CLUBS = 3,
                      MIN_RANK = ACE,
                      MAX_RANK = KING,
-                     NUM_SUITS = 4,
-                     /** The default rank. */
-                     DEF_RANK = ACE,
-                     /** The default suit. */
-                     DEF_SUIT = SPADES;
+                     NUM_SUITS = 4;
    
    // Define fields
-   private int rank,
+   private final int rank,
                suit;
    
    // Constructors
-   /** Creates a default card—an ace of spades. */
+   /** Creates a random card. */
    public Card() {
-      rank = DEF_RANK;
-      suit = DEF_SUIT;
+      
+      rank = randRank();
+      suit = randSuit();
    }
    
    /**
       Creates a card with the rank and suit given.
-      @param rank The card’s rank. (If an invalid value is given,
-                  the rank will default to an ace.)
-      @param suit The card’s suit. (If an invalid value is given,
-                  the suit will default to spades.)
+      @param rank The card’s rank as an interger.
+                  (If an invalid value is given,
+                  the rank will be randomly chosen.)
+      @param suit The card’s suit as an interger.
+                  (If an invalid value is given,
+                  the suit will be randomly chosen.)
    */
    public Card(int rank, int suit) {
       
@@ -46,22 +49,42 @@ public class Card {
          this.rank = rank;
       }
       else {
-         this.rank = DEF_RANK;
+         this.rank = randRank();
       }
       
-      if (0 <= suit && suit <= NUM_SUITS) {
+      if (0 <= suit && suit < NUM_SUITS) {
          this.suit = suit;
       }
       else {
-         this.suit = DEF_SUIT;
+         this.suit = randSuit();
       }
    }
    
    // Methods
    
    /**
+      Generates a random rank.
+      @return A rank as an interger.
+   */
+   private static int randRank() {
+      
+      Random rand = new Random();
+      return MIN_RANK + rand.nextInt(MAX_RANK - MIN_RANK + 1);
+   }
+   
+   /**
+      Generates a random suit.
+      @return A suit as an interger.
+   */
+   private static int randSuit() {
+      
+      Random rand = new Random();
+      return rand.nextInt(NUM_SUITS);
+   }
+   
+   /**
       Returns the rank as an interger value.
-      @returns The card’s rank as an interger.
+      @return The card’s rank as an interger.
    */
    public int getRank() {
       return rank;
@@ -69,7 +92,7 @@ public class Card {
    
    /**
       Returns the suit as an interger value.
-      @returns The card’s suit represented by an interger.
+      @return The card’s suit represented by an interger.
    */
    public int getSuit() {
       return suit;
@@ -77,7 +100,7 @@ public class Card {
    
    /**
       Returns the card’s rank name.
-      @returns The card’s rank.
+      @return The card’s rank.
    */
    /*public String getRankName() {
       
@@ -87,19 +110,19 @@ public class Card {
    /**
       @return The rank in shorthand. 
    */
-   public String getRankShort(){
+   public String getRankShort() {
       
       if (getRank() == ACE) {
          return "A";
       }
-      else if (getRank() == KING) {
-         return "K";
+      else if (getRank() == JACK) {
+         return "J";
       }
       else if (getRank() == QUEEN) {
          return "Q";
       }
-      else if (getRank() == JACK) {
-         return "J";
+      else if (getRank() == KING) {
+         return "K";
       }
       else {
          return "" + rank;
@@ -133,7 +156,7 @@ public class Card {
    }
    
    /**
-      @returns The card represented as a
+      @return The card represented as a
                String—the card’s name in shorthand.
    */
    public String toString() {
@@ -141,7 +164,40 @@ public class Card {
    }
    
    public static void main(String[] args) {
-      Card myCard = new Card(4, Card.SPADES);
-      System.out.println(myCard);
+      
+      Card myCard;
+      
+      for (int i = 0; i < 10; i++) {
+         
+         myCard = new Card();
+         System.out.println(myCard);
+      }
+      
+      /*for (int tgtRank = MIN_RANK; tgtRank <= MAX_RANK; tgtRank++) {
+         
+         for (int tgtSuit = 0; tgtSuit < NUM_SUITS; tgtSuit++) {
+            
+            do {
+               
+               myCard = new Card();
+               
+               if (myCard.getRank() < MIN_RANK ||
+                   myCard.getRank() > MAX_RANK) {
+                  
+                  System.out.println("Invalid rank: " +
+                                     myCard.getRank() + ".");
+               }
+               
+               if (myCard.getSuit() < 0 ||
+                   myCard.getSuit() >= NUM_SUITS) {
+                  
+                  System.out.println("Invalid suit: " +
+                                     myCard.getSuit() + ".");
+               }
+            } while (myCard.getRank() != tgtRank ||
+                     myCard.getSuit() != tgtSuit);
+            System.out.println(myCard);
+         }
+      }*/
    }
 }

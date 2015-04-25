@@ -15,9 +15,9 @@ public class Deck
    public final static int CARDS_IN_DECK = 52;
 
    /** The collection of Cards */
-   private Card [] deck;
+   protected Card [] deck;
    /** Current number of Cards in Deck */
-   private int ct;
+   protected int ct;
    
    /**
     * Constructs a regular 52-card deck.  Initially, the cards
@@ -36,7 +36,7 @@ public class Deck
       deck = new Card[CARDS_IN_DECK];
       for (int r = Card.MIN_RANK; r<=Card.MAX_RANK;r++)
       {
-         for (int s=0;s<=Card.NUM_SUITS;s++)
+         for (int s=0;s<Card.NUM_SUITS;s++)
          {
             deck[ct]=new Card(r,s);
             ct = ct + 1;
