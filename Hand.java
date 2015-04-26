@@ -99,16 +99,14 @@ public class Hand extends Deck {
       ct += numCards;
    }
    
-   /*
-   public static void main(String[] args) {
-      Hand myHand = new Hand();
-      Hand myHand2 = new Hand();
-      myHand.addCardToTop(new Card(Card.ACE, Card.SPADES));
-      myHand.addCardToTop(new Card(5, Card.HEARTS));
-      myHand.addCardToTop(new Card(Card.KING, Card.CLUBS));
-      myHand2.addCardsToBottom(myHand, 2);
-      System.out.println(myHand2.dealCard());
-      System.out.println(myHand.dealCard());
-   }
-   */
+//    public static void main(String[] args) {
+//       Hand myHand = new Hand();
+//       Hand myHand2 = new Hand();
+//       myHand.addCardToTop(new Card(Card.ACE, Card.SPADES));
+//       myHand.addCardToTop(new Card(5, Card.HEARTS));
+//       myHand.addCardToTop(new Card(Card.KING, Card.CLUBS));
+//       myHand2.addCardsToBottom(myHand, 2);
+//       System.out.println(myHand2.dealCard());
+//       System.out.println(myHand.dealCard());
+//    }
 }
