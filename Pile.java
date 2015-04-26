@@ -30,7 +30,7 @@ public class Pile extends Deck {
       Adds a card to the bottom of the deck.
       @param newCard The card to be added.
    */
-   public void addCardToBottom(Card newCard) {
+   public void addCard(Card newCard) {
       
       // Check if there’s room to add a card.
       if (ct < CARDS_IN_DECK) {
@@ -50,7 +50,7 @@ public class Pile extends Deck {
       Adds a set of cards to the bottom of the deck.
       @param newCards The set of cards to be added.
    */
-   public void addCardsToBottom(Deck newCards) {
+   public void addCards(Deck newCards) {
       
       int pileSize = newCards.cardsRemaining();
       
@@ -76,7 +76,7 @@ public class Pile extends Deck {
       @param newCards The pile from which the cards will be taken.
       @param numCards The number of cards which are to be added.
    */
-   public void addCardsToBottom(Deck newCards, int numCards) {
+   public void addCards(Deck newCards, int numCards) {
       
       int pileSize = newCards.cardsRemaining();
       
@@ -99,21 +99,7 @@ public class Pile extends Deck {
       ct += numCards;
    }
    
-   /**
-      Adds a card to the top of the pile.
-      @param newCard The card to be added.
-   */
-   public void addCardToTop(Card newCard) {
-      
-      // Check if there’s room to add a card.
-      if (ct < CARDS_IN_DECK) {
-         
-         // Add the card to the bottom.
-         deck[ct] = newCard;
-         ct++;
-      }      
-   }
-   
+   /*
    public static void main(String[] args) {
       Pile myPile = new Pile();
       Pile myPile2 = new Pile();
@@ -124,4 +110,5 @@ public class Pile extends Deck {
       System.out.println(myPile2.dealCard());
       System.out.println(myPile.dealCard());
    }
+   */
 }
