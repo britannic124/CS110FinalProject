@@ -55,7 +55,9 @@ public class Hand extends Deck {
       int handSize = newCards.cardsRemaining();
       
       // Check if there’s room to add cards
-      if (ct + handSize < CARDS_IN_DECK) {
+      // and if there are cards to move
+      if (ct + handSize < CARDS_IN_DECK &&
+          !isEmpty()) {
          
          // Shift each card in the deck up the
          // needed number of spaces

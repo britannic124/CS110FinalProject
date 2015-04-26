@@ -9,24 +9,28 @@ import java.util.Random;
 
 public class Card {
 
-   // Define class constants
-   public static int ACE = 1,
-                     JACK = 11,
-                     QUEEN = 12,
-                     KING = 13,
-                     SPADES = 0,
-                     HEARTS = 1,
-                     DIAMONDS = 2,
-                     CLUBS = 3,
-                     MIN_RANK = ACE,
-                     MAX_RANK = KING,
-                     NUM_SUITS = 4;
+   // Class constants
+   public static final int ACE = 1,
+                           JACK = 11,
+                           QUEEN = 12,
+                           KING = 13,
+                           SPADES = 0,
+                           HEARTS = 1,
+                           DIAMONDS = 2,
+                           CLUBS = 3,
+                           MIN_RANK = ACE,
+                           MAX_RANK = KING,
+                           NUM_SUITS = 4;
    
-   // Define fields
-   private final int rank,
-               suit;
+   // Fields
+   
+   /** The card’s rank. */
+   private final int rank;
+   /** The card’s suit. */
+   private final int suit;
    
    // Constructors
+   
    /** Creates a random card. */
    public Card() {
       
@@ -95,6 +99,7 @@ public class Card {
    /**
       Returns the rank as an interger value.
       @return The card’s rank as an interger.
+              (e.g. {@value ACE})
    */
    public int getRank() {
       return rank;
@@ -102,7 +107,8 @@ public class Card {
    
    /**
       Returns the suit as an interger value.
-      @return The card’s suit represented by an interger.
+      @return The card’s suit represented by
+              an interger. (e.g. {@value SPADES})
    */
    public int getSuit() {
       return suit;
@@ -118,7 +124,8 @@ public class Card {
    */
    
    /**
-      @return The rank in shorthand. 
+      Returns the card’s rank in shorthand.
+      @return The rank in shorthand. (e.g. "A")
    */
    public String getRankShort() {
       
@@ -140,7 +147,8 @@ public class Card {
    }
    
    /**
-      @return The suit in shorthand.
+      Returns the suit in shorthand.
+      @return The suit in shorthand. (e.g. "♠")
    */
    public String getSuitShort() {
       
@@ -159,7 +167,8 @@ public class Card {
    }
    
    /**
-      @return The card’s name in shorthand.
+      Returns the card’s name in shorthand.
+      @return The card’s name in shorthand. (e.g. "A♠")
    */
    public String getNameShort() {
       return getRankShort() + getSuitShort();
@@ -206,31 +215,31 @@ public class Card {
 //          System.out.println(myCard);
 //       }
 //       
-//       /*for (int tgtRank = MIN_RANK; tgtRank <= MAX_RANK; tgtRank++) {
-//          
-//          for (int tgtSuit = 0; tgtSuit < NUM_SUITS; tgtSuit++) {
-//             
-//             do {
-//                
-//                myCard = new Card();
-//                
-//                if (myCard.getRank() < MIN_RANK ||
-//                    myCard.getRank() > MAX_RANK) {
-//                   
-//                   System.out.println("Invalid rank: " +
-//                                      myCard.getRank() + ".");
-//                }
-//                
-//                if (myCard.getSuit() < 0 ||
-//                    myCard.getSuit() >= NUM_SUITS) {
-//                   
-//                   System.out.println("Invalid suit: " +
-//                                      myCard.getSuit() + ".");
-//                }
-//             } while (myCard.getRank() != tgtRank ||
-//                      myCard.getSuit() != tgtSuit);
-//             System.out.println(myCard);
-//          }
-//       }*/
+// //       for (int tgtRank = MIN_RANK; tgtRank <= MAX_RANK; tgtRank++) {
+// //          
+// //          for (int tgtSuit = 0; tgtSuit < NUM_SUITS; tgtSuit++) {
+// //             
+// //             do {
+// //                
+// //                myCard = new Card();
+// //                
+// //                if (myCard.getRank() < MIN_RANK ||
+// //                    myCard.getRank() > MAX_RANK) {
+// //                   
+// //                   System.out.println("Invalid rank: " +
+// //                                      myCard.getRank() + ".");
+// //                }
+// //                
+// //                if (myCard.getSuit() < 0 ||
+// //                    myCard.getSuit() >= NUM_SUITS) {
+// //                   
+// //                   System.out.println("Invalid suit: " +
+// //                                      myCard.getSuit() + ".");
+// //                }
+// //             } while (myCard.getRank() != tgtRank ||
+// //                      myCard.getSuit() != tgtSuit);
+// //             System.out.println(myCard);
+// //          }
+// //       }
 //    }
 }
