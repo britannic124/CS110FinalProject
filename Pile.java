@@ -12,7 +12,7 @@ public class Pile extends Hand {
       @return The top card.
    */
    public Card getTopCard() {
-      return deck[ct-1];
+      return new Card(deck[ct-1]);
    }
    
    /**
