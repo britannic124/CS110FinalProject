@@ -11,7 +11,6 @@ public class Hand extends Deck {
       Creates a hand capable of holding up to 52 cards.
    */
    public Hand() {
-      deck = new Card[CARDS_IN_DECK];
       removeAll();
    }
    
@@ -102,13 +101,15 @@ public class Hand extends Deck {
    }
    
 //    public static void main(String[] args) {
-//       Hand myHand = new Hand();
-//       Hand myHand2 = new Hand();
-//       myHand.addCardToTop(new Card(Card.ACE, Card.SPADES));
-//       myHand.addCardToTop(new Card(5, Card.HEARTS));
-//       myHand.addCardToTop(new Card(Card.KING, Card.CLUBS));
-//       myHand2.addCardsToBottom(myHand, 2);
-//       System.out.println(myHand2.dealCard());
-//       System.out.println(myHand.dealCard());
+//       Deck mainDeck = new Deck();
+//       Hand playHand = new Hand();
+//       Hand compHand = new Hand();
+//       
+//       mainDeck.shuffle(); // Shuffle deck
+//       // Distribute cards equaly
+//       playHand.addCards(mainDeck, Deck.CARDS_IN_DECK / 2);
+//       compHand.addCards(mainDeck);
+//       compHand.addCard(playHand.dealCard());
+//       System.out.println(playHand.cardsRemaining());
 //    }
 }

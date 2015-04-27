@@ -9,6 +9,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.io.IOException;
+
 public class War extends JFrame {
    
    // Class constants
@@ -17,7 +22,8 @@ public class War extends JFrame {
    private final int WIN_W = 800;
    /** Window width in pixels. */
    private final int WIN_H = 600;
-   public static final String DEAL_TXT = "Deal",
+   public static final String STRT_TXT = "Start",
+                              DEAL_TXT = "Deal",
                               NEXT_TXT = "Next",
                               IMG_PATH = "resource/",
                               IMG_EXT = ".jpg",
@@ -34,7 +40,7 @@ public class War extends JFrame {
                   playHandLabel,
                   playPileLabel;
    private JButton button;
-   private GameData game;
+   public GameData game;
    
    // Constructor
    
@@ -51,11 +57,12 @@ public class War extends JFrame {
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close button
       
       
-      button = new JButton(""); // Create button
+      button = new JButton(STRT_TXT); // Create button
       button.addActionListener(new ButtonListener()); // Add action listener
       
       setLayout(new BorderLayout()); // Set layout
       buildPanels(); // Build panels
+      setAppearance(); // Set appearance
       pack(); // Pack panels
       setVisible(true); // Display window
    }
@@ -73,13 +80,13 @@ public class War extends JFrame {
       buttonPanel = new JPanel();
       
       // Create labels
-      compHandLabel = new JLabel("", new ImageIcon(BLNK_IMG),
+      compHandLabel = new JLabel("", scaledImg(BLNK_IMG),
                                  SwingConstants.RIGHT);
-      compPileLabel = new JLabel("", new ImageIcon(BLNK_IMG),
+      compPileLabel = new JLabel("", scaledImg(BLNK_IMG),
                                  SwingConstants.RIGHT);
-      playHandLabel = new JLabel("", new ImageIcon(BLNK_IMG),
+      playHandLabel = new JLabel("", scaledImg(BLNK_IMG),
                                  SwingConstants.RIGHT);
-      playPileLabel = new JLabel("", new ImageIcon(BLNK_IMG),
+      playPileLabel = new JLabel("", scaledImg(BLNK_IMG),
                                  SwingConstants.RIGHT);
       
       // Set panel layouts
@@ -105,7 +112,6 @@ public class War extends JFrame {
       Sets the appearance of the labels.
    */
    private void setAppearance() {
-      compPileLabel.setText("HELLO");
       
       // Check how many cards are remaining
       int compHandCt = game.getCompHandRemaining(),
@@ -116,39 +122,40 @@ public class War extends JFrame {
       // Set computer hand label appearance
       compHandLabel.setText(Integer.toString(compHandCt));
       if (compHandCt > 0) {
-         compHandLabel.setIcon(new ImageIcon(BACK_IMG));
+         compHandLabel.setIcon(scaledImg(BACK_IMG));
       }
       else {
-         compHandLabel.setIcon(new ImageIcon(BLNK_IMG));
+         compHandLabel.setIcon(scaledImg(BLNK_IMG));
       }
       
       // Set computer pile label appearance
       compPileLabel.setText(Integer.toString(compPileCt));
       if (compPileCt > 0) {
-         compPileLabel.setIcon(new ImageIcon(IMG_PATH +
+         System.out.println(IMG_PATH + game.getCompCard() + IMG_EXT);
+         compPileLabel.setIcon(scaledImg(IMG_PATH +
                                game.getCompCard() + IMG_EXT));
       }
       else {
-         compPileLabel.setIcon(new ImageIcon(BLNK_IMG));
+         compPileLabel.setIcon(scaledImg(BLNK_IMG));
       }
       
       // Set player hand label appearance
       playHandLabel.setText(Integer.toString(playHandCt));
       if (playHandCt > 0) {
-         playHandLabel.setIcon(new ImageIcon(BACK_IMG));
+         playHandLabel.setIcon(scaledImg(BACK_IMG));
       }
       else {
-         playHandLabel.setIcon(new ImageIcon(BLNK_IMG));
+         playHandLabel.setIcon(scaledImg(BLNK_IMG));
       }
       
       // Set player pile label appearance
       playPileLabel.setText(Integer.toString(playPileCt));
       if (playPileCt > 0) {
-         playPileLabel.setIcon(new ImageIcon(IMG_PATH +
+         playPileLabel.setIcon(scaledImg(IMG_PATH +
                                game.getPlayCard() + IMG_EXT));
       }
       else {
-         playPileLabel.setIcon(new ImageIcon(BLNK_IMG));
+         playPileLabel.setIcon(scaledImg(BLNK_IMG));
       }
       
       // Set the button’s text
@@ -176,6 +183,25 @@ public class War extends JFrame {
       }
    }
    
+   /**
+      Resizes image to 108 px by 150 px.
+      @param filename The path of the file.
+      @return The resized image.
+   */
+   private ImageIcon scaledImg(String filename){
+      
+      BufferedImage img = null;
+      try {
+         img = ImageIO.read(new File(filename));
+      } catch (IOException e) {
+         e.printStackTrace();
+      }
+      
+      Image dimg = img.getScaledInstance(108, 150, Image.SCALE_SMOOTH);
+      
+      return new ImageIcon(dimg);
+   }
+      
    public static void main(String[] args) {
       
       new War();

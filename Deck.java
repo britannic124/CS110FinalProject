@@ -50,7 +50,7 @@ public class Deck
      * @return A reference to a Card that was top on the Deck
      */
    public Card dealCard()
-   {
+   {  
       ct--;
       return deck[ct];
    }

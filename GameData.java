@@ -68,9 +68,11 @@ public class GameData {
          
          // Deal two cards
          for (int i = 0; i < 2; i++) {
-            playHand.addCard(playHand.dealCard());
-            compHand.addCard(compHand.dealCard());
+            playPile.addCard(playHand.dealCard());
+            compPile.addCard(compHand.dealCard());
          }
+         
+         calcBtlWinner();
       }
       else {
          endWar();
