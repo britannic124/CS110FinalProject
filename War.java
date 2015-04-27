@@ -21,7 +21,8 @@ public class War extends JFrame {
    /** Window width in pixels. */
    private final int WIN_W = 800;
    /** Window width in pixels. */
-   private final int WIN_H = 600;
+   private final int WIN_H = 661;
+   public static final Color BG_COLOR = new Color(53, 94, 59);
    public static final String STRT_TXT = "Start",
                               DEAL_TXT = "Deal",
                               NEXT_TXT = "Next",
@@ -54,6 +55,7 @@ public class War extends JFrame {
       
       setTitle("War"); // Set title
       setSize(WIN_W, WIN_H); // Set size
+      setMinimumSize(new Dimension(WIN_W, WIN_H));
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close button
       
       
@@ -81,14 +83,28 @@ public class War extends JFrame {
       
       // Create labels
       compHandLabel = new JLabel("", scaledImg(BLNK_IMG),
-                                 SwingConstants.RIGHT);
+                                 SwingConstants.CENTER);
       compPileLabel = new JLabel("", scaledImg(BLNK_IMG),
-                                 SwingConstants.RIGHT);
+                                 SwingConstants.CENTER);
       playHandLabel = new JLabel("", scaledImg(BLNK_IMG),
-                                 SwingConstants.RIGHT);
+                                 SwingConstants.CENTER);
       playPileLabel = new JLabel("", scaledImg(BLNK_IMG),
-                                 SwingConstants.RIGHT);
+                                 SwingConstants.CENTER);
       
+      compHandLabel.setBackground(BG_COLOR);
+      compPileLabel.setBackground(BG_COLOR);
+      playHandLabel.setBackground(BG_COLOR);
+      playPileLabel.setBackground(BG_COLOR);
+      compPanel.setBackground(BG_COLOR);
+      playPanel.setBackground(BG_COLOR);
+      buttonPanel.setBackground(BG_COLOR);
+      setBackground(BG_COLOR);
+      compHandLabel.setForeground(Color.WHITE);
+      compPileLabel.setForeground(Color.WHITE);
+      playHandLabel.setForeground(Color.WHITE);
+      playPileLabel.setForeground(Color.WHITE);
+      
+      compHandLabel.setBackground(Color.RED);
       // Set panel layouts
       compPanel.setLayout(new BorderLayout());
       playPanel.setLayout(new BorderLayout());
@@ -131,7 +147,6 @@ public class War extends JFrame {
       // Set computer pile label appearance
       compPileLabel.setText(Integer.toString(compPileCt));
       if (compPileCt > 0) {
-         System.out.println(IMG_PATH + game.getCompCard() + IMG_EXT);
          compPileLabel.setIcon(scaledImg(IMG_PATH +
                                game.getCompCard() + IMG_EXT));
       }

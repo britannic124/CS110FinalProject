@@ -204,42 +204,4 @@ public class Card {
    public String toString() {
       return getNameShort();
    }
-   
-//    public static void main(String[] args) {
-//       
-//       Card myCard;
-//       
-//       for (int i = 0; i < 10; i++) {
-//          
-//          myCard = new Card();
-//          System.out.println(myCard);
-//       }
-//       
-// //       for (int tgtRank = MIN_RANK; tgtRank <= MAX_RANK; tgtRank++) {
-// //          
-// //          for (int tgtSuit = 0; tgtSuit < NUM_SUITS; tgtSuit++) {
-// //             
-// //             do {
-// //                
-// //                myCard = new Card();
-// //                
-// //                if (myCard.getRank() < MIN_RANK ||
-// //                    myCard.getRank() > MAX_RANK) {
-// //                   
-// //                   System.out.println("Invalid rank: " +
-// //                                      myCard.getRank() + ".");
-// //                }
-// //                
-// //                if (myCard.getSuit() < 0 ||
-// //                    myCard.getSuit() >= NUM_SUITS) {
-// //                   
-// //                   System.out.println("Invalid suit: " +
-// //                                      myCard.getSuit() + ".");
-// //                }
-// //             } while (myCard.getRank() != tgtRank ||
-// //                      myCard.getSuit() != tgtSuit);
-// //             System.out.println(myCard);
-// //          }
-// //       }
-//    }
 }

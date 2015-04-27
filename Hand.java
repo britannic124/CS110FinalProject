@@ -99,17 +99,4 @@ public class Hand extends Deck {
       }
       ct += numCards;
    }
-   
-//    public static void main(String[] args) {
-//       Deck mainDeck = new Deck();
-//       Hand playHand = new Hand();
-//       Hand compHand = new Hand();
-//       
-//       mainDeck.shuffle(); // Shuffle deck
-//       // Distribute cards equaly
-//       playHand.addCards(mainDeck, Deck.CARDS_IN_DECK / 2);
-//       compHand.addCards(mainDeck);
-//       compHand.addCard(playHand.dealCard());
-//       System.out.println(playHand.cardsRemaining());
-//    }
 }
