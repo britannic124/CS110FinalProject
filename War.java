@@ -56,6 +56,8 @@ public class War extends JFrame {
       setTitle("War"); // Set title
       setSize(WIN_W, WIN_H); // Set size
       setMinimumSize(new Dimension(WIN_W, WIN_H));
+      setMaximumSize(new Dimension(WIN_W, WIN_H));
+      setLocationRelativeTo(null); // Center on screen
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close button
       
       
