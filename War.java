@@ -131,15 +131,15 @@ public class War extends JFrame {
    */
    private void setAppearance() {
       
-      // Check how many cards are remaining
-      int compHandCt = game.getCompHandRemaining(),
-          compPileCt = game.getCompPileRemaining(),
-          playHandCt = game.getPlayHandRemaining(),
-          playPileCt = game.getPlayPileRemaining();
+      // Check how many cards are in each pile
+      int compHandCount = game.compHandSize(),
+          compPileCount = game.compPileSize(),
+          playHandCount = game.playHandSize(),
+          playPileCount = game.playPileSize();
       
       // Set computer hand label appearance
-      compHandLabel.setText(Integer.toString(compHandCt));
-      if (compHandCt > 0) {
+      compHandLabel.setText(Integer.toString(game.compHandSize()));
+      if (compHandCount > 0) {
          compHandLabel.setIcon(scaledImg(BACK_IMG));
       }
       else {
@@ -147,18 +147,18 @@ public class War extends JFrame {
       }
       
       // Set computer pile label appearance
-      compPileLabel.setText(Integer.toString(compPileCt));
-      if (compPileCt > 0) {
+      compPileLabel.setText(Integer.toString(compPileCount));
+      if (compPileCount > 0) {
          compPileLabel.setIcon(scaledImg(IMG_PATH +
-                               game.getCompCard() + IMG_EXT));
+                               game.getCompPileTop() + IMG_EXT));
       }
       else {
          compPileLabel.setIcon(scaledImg(BLNK_IMG));
       }
       
       // Set player hand label appearance
-      playHandLabel.setText(Integer.toString(playHandCt));
-      if (playHandCt > 0) {
+      playHandLabel.setText(Integer.toString(playHandCount));
+      if (playHandCount > 0) {
          playHandLabel.setIcon(scaledImg(BACK_IMG));
       }
       else {
@@ -166,17 +166,17 @@ public class War extends JFrame {
       }
       
       // Set player pile label appearance
-      playPileLabel.setText(Integer.toString(playPileCt));
-      if (playPileCt > 0) {
+      playPileLabel.setText(Integer.toString(playPileCount));
+      if (playPileCount > 0) {
          playPileLabel.setIcon(scaledImg(IMG_PATH +
-                               game.getPlayCard() + IMG_EXT));
+                               game.getPlayPileTop() + IMG_EXT));
       }
       else {
          playPileLabel.setIcon(scaledImg(BLNK_IMG));
       }
       
       // Set the button’s text
-      if (game.getBattleWinner() == GameData.NONE) {
+      if (game.getBtlWinner() == GameData.NONE) {
          button.setText(DEAL_TXT);
       }
       else {
@@ -195,7 +195,7 @@ public class War extends JFrame {
       */
       public void actionPerformed(ActionEvent event) {
          
-         game.startBattle(); // Initiate a round
+         game.next(); // Initiate a round
          setAppearance(); // Refresh GUI
       }
    }

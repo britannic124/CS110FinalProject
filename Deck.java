@@ -1,90 +1,69 @@
 /**
- * Representation of a Deck of cards.  
- * Initialized to a standard 52 card deck. 
- *
- * @author Jackie Horton
- * @editor J.P. O’Malley
- */
+   Represents a standard 52-card deck.
+   @author J.P. O’Malley
+*/
 
+
+// Import classes
 import java.util.Random;
-public class Deck 
-{
-   /** 
-   *  Number of cards in standard deck {@value #CARDS_IN_DECK}
-   **/
-   public final static int CARDS_IN_DECK = 52;
 
-   /** The collection of Cards */
-   protected Card [] deck;
-   /** Current number of Cards in Deck */
-   protected int ct;
+public class Deck extends CardPile {
+   
+   // Fields
+   
+   /** The number of cards in a full deck. */
+   public static final int FULL_DECK = 52;
+   
+   // Constructors
    
    /**
-    * Constructs a regular 52-card deck.  Initially, the cards
-    * are in a sorted order.  The shuffle() method can be called to
-    * randomize the order.  
-    */
-   public Deck()
-   {
+      Creates a Deck object with a full
+      unshuffled 52-card deck.
+   */
+   public Deck() {
       freshDeck();
    }
+   
+   // Methods
+   
    /**
-    * Create a new collection of 52 cards, in sorted order
-    */
-   public void freshDeck()
-   {
-      deck = new Card[CARDS_IN_DECK];
-      for (int r = Card.MIN_RANK; r<=Card.MAX_RANK;r++)
-      {
-         for (int s=0;s<Card.NUM_SUITS;s++)
-         {
-            deck[ct]=new Card(r,s);
-            ct = ct + 1;
+      Replaces the current deck with a
+      full unshuffled 52-card deck.
+   */
+   public void freshDeck() {
+      
+      // Remove current cards
+      while (!isEmpty()) {
+         remove(0);
+      }
+      
+      // Go through each card suit 
+      for (int s = 0; s < Card.NUM_SUITS; s++) {
+      
+         // Go through each card rank
+         for (int r = Card.MIN_RANK; r <= Card.MAX_RANK; r++) {
+            
+            // Add each type of card to the deck
+            addToBottom(new Card(r, s));
          }
       }
-     
-   
    }
-   /** 
-     * Remove and return the top Card on the Deck
-     * @return A reference to a Card that was top on the Deck
-     */
-   public Card dealCard()
-   {  
-      ct--;
-      return deck[ct];
-   }
-   /** 
-     * Return current number of Cards in Deck
-     * @return number of Cards in Deck
-     */
-   public int cardsRemaining()
-   {  
-      return ct;
-   }
-   /** 
-     * Randomize the order of Cards in Deck
-     */
-   public void shuffle()
-   {
-      int randNum;
-      Card temp;
-      Random r = new Random();
-      for (int i = 0; i < ct; i++)
-      {
-         randNum = r.nextInt(ct);
-         temp = deck[i];
-         deck[i]=deck[randNum];
-         deck[randNum]=temp;
+            
+   /**
+      Shuffles all the cards in the deck.
+   */
+   public void shuffle() {
+      
+      Random rand = new Random(); 
+      int randIndex;
+      Card randCard;
+      
+      for (int i = 0; i < size(); i++) {
+         
+         randIndex = rand.nextInt(size());
+         randCard = get(i);
+         set(i, get(randIndex));
+         set(randIndex, randCard);
       }
    }
-   /** 
-     * Determine if Deck is empty
-     * @return true if there are no more cards, false otherwise
-     */
-   public boolean isEmpty()
-   {
-      return (cardsRemaining() == 0);
-   }
 }
-
