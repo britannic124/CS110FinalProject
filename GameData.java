@@ -36,7 +36,7 @@ public class GameData {
    /** Integer representation of player. */
    public static final int PLAY = 1;
    /** Integer representation of computer. */
-   public static final int COMP = 3;
+   public static final int COMP = 2;
    
    // Constructor
    
