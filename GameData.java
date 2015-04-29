@@ -36,7 +36,7 @@ public class GameData {
    /** Integer representation of player. */
    public static final int PLAY = 1;
    /** Integer representation of computer. */
-   public static final int COMP = 2;
+   public static final int COMP = 3;
    
    // Constructor
    
@@ -77,7 +77,6 @@ public class GameData {
       wins.
    */
    public void next() {
-      System.out.println(playPile.isEmpty() && compPile.isEmpty());
       
       // Check that there are no cards in the piles
       if (playPile.isEmpty() && compPile.isEmpty()) {
@@ -97,7 +96,15 @@ public class GameData {
       else {
          endWar();
       }
-      System.out.println(btlWinner);
+      
+      // Check if both the player and the computer can go
+      // again; if not, declare the winner
+      if (playHand.isEmpty()) {
+         gameWinner = COMP;
+      }
+      else if (compHand.isEmpty()) {
+         gameWinner = PLAY;
+      }
    }
    
    /**
@@ -108,35 +115,49 @@ public class GameData {
       and the computer will each deal
    */
    private void battle(int numCards) {
-   
-      System.out.println("Running GameData.battle(int)…");
             
       for (int i = 0; i < numCards; i++) {
          
-         playPile.addToTop(playHand.removeFromTop());
-         compPile.addToTop(compHand.removeFromTop());
+         // Check if the play hand is empty
+         if (!playHand.isEmpty()) {
+            playPile.addToTop(playHand.removeFromTop());
+         }
+         else {
+            gameWinner = COMP;
+         }
+         // Check if the computer hand is empty
+         if (!compHand.isEmpty()) {
+            compPile.addToTop(compHand.removeFromTop());
+         }
+         else {
+            gameWinner = PLAY;
+         }
       }
       
-      // Get the last cards played
-      Card playCard = getPlayPileTop(),
-           compCard = getCompPileTop();
+      // Only do this if no one has won the game
+      if (gameWinner == NONE) {
       
-      // Compare the cards
-      
-      // If the rank of the player’s card is
-      // higher the rank of the computer’s card…
-      if (playCard.compareRank(compCard) > 0) {
-         btlWinner = PLAY;
-      }
-      // If the player’s card and the computer’s
-      // card have the same rank
-      else if (playCard.compareRank(compCard) == 0) {
-         btlWinner = NONE;
-      }
-      // If the rank of the computer’s card is
-      // higher than the rank player’s card…
-      else {
-         btlWinner = COMP;
+         // Get the last cards played
+         Card playCard = getPlayPileTop(),
+              compCard = getCompPileTop();
+         
+         // Compare the cards
+         
+         // If the rank of the player’s card is
+         // higher the rank of the computer’s card…
+         if (playCard.compareRank(compCard) > 0) {
+            btlWinner = PLAY;
+         }
+         // If the player’s card and the computer’s
+         // card have the same rank
+         else if (playCard.compareRank(compCard) == 0) {
+            btlWinner = NONE;
+         }
+         // If the rank of the computer’s card is
+         // higher than the rank player’s card…
+         else {
+            btlWinner = COMP;
+         }
       }
    }
    

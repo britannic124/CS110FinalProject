@@ -21,11 +21,20 @@ public class War extends JFrame {
    /** Window width in pixels. */
    private final int WIN_W = 800;
    /** Window width in pixels. */
-   private final int WIN_H = 661;
+   private final int WIN_H = 665;
+   /** Background color. */
    public static final Color BG_COLOR = new Color(53, 94, 59);
-   public static final String STRT_TXT = "Start",
-                              DEAL_TXT = "Deal",
+   /** Message background color. */
+   public static final Color MSG_COLOR = new Color(247, 0, 28);
+   public static final String PLAY_BTL_TXT = "Player Wins!",
+                              COMP_BTL_TXT = "Computer Wins!",
+                              PLAY_GAME_TXT = "Player Wins the Game!",
+                              COMP_GAME_TXT = "Computer Wins the Game!",
+                              START_TXT = "Start",
+                              DEAL_TXT = "Battle",
+                              WAR_TXT = "War",
                               NEXT_TXT = "Next",
+                              RST_TXT = "New Game",
                               IMG_PATH = "resource/",
                               IMG_EXT = ".jpg",
                               BACK_IMG = IMG_PATH + "back.jpg",
@@ -33,10 +42,13 @@ public class War extends JFrame {
    
    // Fields
    
-   private JPanel compPanel,
+   private JPanel msgPanel,
+                  ctrPanel,
+                  compPanel,
                   playPanel,
                   buttonPanel;
-   private JLabel compHandLabel,
+   private JLabel msgLabel,
+                  compHandLabel,
                   compPileLabel,
                   playHandLabel,
                   playPileLabel;
@@ -61,7 +73,7 @@ public class War extends JFrame {
       setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Close button
       
       
-      button = new JButton(STRT_TXT); // Create button
+      button = new JButton(START_TXT); // Create button
       button.addActionListener(new ButtonListener()); // Add action listener
       
       setLayout(new BorderLayout()); // Set layout
@@ -79,11 +91,14 @@ public class War extends JFrame {
    private void buildPanels() {
    
       // Create panels
+      msgPanel = new JPanel();
+      ctrPanel = new JPanel();
       compPanel = new JPanel();
       playPanel = new JPanel();
       buttonPanel = new JPanel();
       
       // Create labels
+      msgLabel = new JLabel(" ", SwingConstants.CENTER);
       compHandLabel = new JLabel("", scaledImg(BLNK_IMG),
                                  SwingConstants.CENTER);
       compPileLabel = new JLabel("", scaledImg(BLNK_IMG),
@@ -93,25 +108,28 @@ public class War extends JFrame {
       playPileLabel = new JLabel("", scaledImg(BLNK_IMG),
                                  SwingConstants.CENTER);
       
-      compHandLabel.setBackground(BG_COLOR);
-      compPileLabel.setBackground(BG_COLOR);
-      playHandLabel.setBackground(BG_COLOR);
-      playPileLabel.setBackground(BG_COLOR);
+      // Set background colors
+      setBackground(BG_COLOR);
+      msgPanel.setBackground(BG_COLOR);
       compPanel.setBackground(BG_COLOR);
       playPanel.setBackground(BG_COLOR);
       buttonPanel.setBackground(BG_COLOR);
-      setBackground(BG_COLOR);
+      
+      // Set foreground colors
+      msgLabel.setForeground(Color.WHITE);
       compHandLabel.setForeground(Color.WHITE);
       compPileLabel.setForeground(Color.WHITE);
       playHandLabel.setForeground(Color.WHITE);
       playPileLabel.setForeground(Color.WHITE);
       
-      compHandLabel.setBackground(Color.RED);
       // Set panel layouts
+      ctrPanel.setLayout(new BorderLayout());
       compPanel.setLayout(new BorderLayout());
       playPanel.setLayout(new BorderLayout());
       
       // Add labels to panels
+      msgPanel.add(msgLabel);
+      
       compPanel.add(compHandLabel, BorderLayout.NORTH);
       compPanel.add(compPileLabel, BorderLayout.SOUTH);
             
@@ -120,9 +138,13 @@ public class War extends JFrame {
       
       buttonPanel.add(button);
       
+      // Add panels to panels
+      ctrPanel.add(compPanel, BorderLayout.NORTH);
+      ctrPanel.add(playPanel, BorderLayout.SOUTH);
+      
       // Add panels to window and pack
-      add(compPanel, BorderLayout.NORTH);
-      add(playPanel, BorderLayout.CENTER);
+      add(msgPanel, BorderLayout.NORTH);
+      add(ctrPanel, BorderLayout.CENTER);
       add(buttonPanel, BorderLayout.SOUTH);
    }
    
@@ -175,12 +197,56 @@ public class War extends JFrame {
          playPileLabel.setIcon(scaledImg(BLNK_IMG));
       }
       
-      // Set the button’s text
-      if (game.getBtlWinner() == GameData.NONE) {
-         button.setText(DEAL_TXT);
+      // Set button and message text
+      
+      // Is someone won the game…
+      if (game.getGameWinner() != GameData.NONE) {
+         
+         button.setText(RST_TXT);
+         msgLabel.setBackground(BG_COLOR);
+         
+         // If the user won the game…
+         if (game.getGameWinner() == GameData.PLAY) {
+            msgLabel.setText(PLAY_GAME_TXT);
+         }
+         
+         // If the computer won the game…
+         else if (game.getGameWinner() == GameData.COMP) {
+            msgLabel.setText(COMP_GAME_TXT);
+         }
       }
+      
+      // If no one won the game; if no one won the battle…
+      else if (game.getBtlWinner() == GameData.NONE) {
+         
+         button.setText(DEAL_TXT);
+         
+         // If there is no war…
+         if (playPileCount == 0 && compPileCount == 0) {
+            msgPanel.setBackground(BG_COLOR);
+            msgLabel.setText(" ");
+         }
+         
+         // If there is a war…
+         else {
+            msgPanel.setBackground(MSG_COLOR);
+            msgLabel.setText(WAR_TXT);
+         }
+      }
+      
+      // If someone won the battle…
       else {
+         
          button.setText(NEXT_TXT);
+         msgPanel.setBackground(BG_COLOR);
+         
+         // If the player won the battle…
+         if (game.getBtlWinner() == GameData.PLAY) {
+            msgLabel.setText(PLAY_BTL_TXT);
+         }
+         else {
+            msgLabel.setText(COMP_BTL_TXT);
+         }
       }
    }
    
@@ -195,9 +261,22 @@ public class War extends JFrame {
       */
       public void actionPerformed(ActionEvent event) {
          
-         game.next(); // Initiate a round
+         // Only initiate next step if there is no winner
+         if (game.getGameWinner() == GameData.NONE) {
+            game.next(); // Initiate a round
+         }
+         else {
+            resetGame();
+         }
          setAppearance(); // Refresh GUI
       }
+   }
+   
+   /**
+      Starts a new game.
+   */
+   private void resetGame() {
+      game = new GameData();
    }
    
    /**
