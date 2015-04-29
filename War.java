@@ -266,7 +266,7 @@ public class War extends JFrame {
             game.next(); // Initiate a round
          }
          else {
-            resetGame();
+            resetGame(); // If the game is over, reset the game
          }
          setAppearance(); // Refresh GUI
       }
