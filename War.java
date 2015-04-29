@@ -53,6 +53,7 @@ public class War extends JFrame {
                   playHandLabel,
                   playPileLabel;
    private JButton button;
+   /** The root game data. */
    private GameData game;
    
    // Constructor
