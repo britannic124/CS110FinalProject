@@ -148,27 +148,27 @@ public class Card {
    
    /**
       Returns the suit in shorthand.
-      @return The suit in shorthand. (e.g. "♠")
+      @return The suit in shorthand. (e.g. "s")
    */
    public String getSuitShort() {
       
       if (getSuit() == SPADES) {
-         return "♠";
+         return "s";
       }
       else if (getSuit() == HEARTS) {
-         return "♥";
+         return "h";
       }
       else if (getSuit() == DIAMONDS) {
-         return "♦";
+         return "d";
       }
       else {
-         return "♣";
+         return "c";
       }
    }
    
    /**
       Returns the card’s name in shorthand.
-      @return The card’s name in shorthand. (e.g. "A♠")
+      @return The card’s name in shorthand. (e.g. "As")
    */
    public String getNameShort() {
       return getRankShort() + getSuitShort();
